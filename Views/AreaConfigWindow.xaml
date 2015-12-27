@@ -1,0 +1,100 @@
+﻿<Window x:Class="MascotTobashi.Views.AreaConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="ますこっととばし範囲設定"
+        AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Topmost="True"
+        MinWidth="{Binding WidthMin, Mode=OneTime}" MinHeight="{Binding HeightMin, Mode=OneTime}"
+        Background="#80ffffff"
+        MouseLeftButtonDown="window_MouseLeftButtonDown">
+    <Window.Resources>
+        <SolidColorBrush x:Key="cornerBrush" Color="Transparent" />
+        <SolidColorBrush x:Key="sideBrush" Color="Transparent" />
+    </Window.Resources>
+    <Grid>
+        <Border BorderThickness="1" BorderBrush="Black">
+            <Grid>
+                <Grid.Resources>
+                    <Style x:Key="LeftRight" TargetType="Rectangle">
+                        <Setter Property="Width" Value="10" />
+                        <Setter Property="Margin" Value="0, 10, 0, 10" />
+                        <Setter Property="Fill" Value="{StaticResource sideBrush}" />
+                        <EventSetter Event="MouseEnter" Handler="DisplayResizeCursor" />
+                        <EventSetter Event="MouseLeave" Handler="ResetCursor" />
+                        <EventSetter Event="PreviewMouseDown" Handler="Resize" />
+                    </Style>
+                    <Style x:Key="TopBottom" TargetType="Rectangle">
+                        <Setter Property="Height" Value="10" />
+                        <Setter Property="Margin" Value="10, 0, 10, 0" />
+                        <Setter Property="Fill" Value="{StaticResource sideBrush}" />
+                        <EventSetter Event="MouseEnter" Handler="DisplayResizeCursor" />
+                        <EventSetter Event="MouseLeave" Handler="ResetCursor" />
+                        <EventSetter Event="PreviewMouseDown" Handler="Resize" />
+                    </Style>
+                    <Style x:Key="Corner" TargetType="Rectangle">
+                        <Setter Property="Width" Value="10" />
+                        <Setter Property="Height" Value="10" />
+                        <Setter Property="Fill" Value="{StaticResource cornerBrush}" />
+                        <EventSetter Event="MouseEnter" Handler="DisplayResizeCursor" />
+                        <EventSetter Event="MouseLeave" Handler="ResetCursor" />
+                        <EventSetter Event="PreviewMouseDown" Handler="Resize" />
+                    </Style>
+                </Grid.Resources>
+                <Rectangle Name="left"        HorizontalAlignment="Left"    VerticalAlignment="Stretch" Style="{StaticResource LeftRight}" />
+                <Rectangle Name="top"         HorizontalAlignment="Stretch" VerticalAlignment="Top"     Style="{StaticResource TopBottom}" />
+                <Rectangle Name="right"       HorizontalAlignment="Right"   VerticalAlignment="Stretch" Style="{StaticResource LeftRight}" />
+                <Rectangle Name="bottom"      HorizontalAlignment="Stretch" VerticalAlignment="Bottom"  Style="{StaticResource TopBottom}" />
+                <Rectangle Name="topLeft"     HorizontalAlignment="Left"    VerticalAlignment="Top"     Style="{StaticResource Corner}" />
+                <Rectangle Name="topRight"    HorizontalAlignment="Right"   VerticalAlignment="Top"     Style="{StaticResource Corner}" />
+                <Rectangle Name="bottomRight" HorizontalAlignment="Right"   VerticalAlignment="Bottom"  Style="{StaticResource Corner}" />
+                <Rectangle Name="bottomLeft"  HorizontalAlignment="Left"    VerticalAlignment="Bottom"  Style="{StaticResource Corner}" />
+                <Border BorderThickness="1" BorderBrush="Black" Margin="10">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Margin" Value="10" />
+                                </Style>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="10" />
+                                </Style>
+                            </Grid.Resources>
+                            <TextBlock Grid.Row="0" Grid.Column="0" TextAlignment="Right">左</TextBlock>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Left}" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" TextAlignment="Right">上</TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Top}" />
+                            <TextBlock Grid.Row="2" Grid.Column="0" TextAlignment="Right">幅</TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Width}" />
+                            <TextBlock Grid.Row="3" Grid.Column="0" TextAlignment="Right">高さ</TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Height}" />
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <StackPanel.Resources>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="80" />
+                                    <Setter Property="Height" Value="40" />
+                                    <Setter Property="Margin" Value="5" />
+                                </Style>
+                            </StackPanel.Resources>
+                            <Button Name="max"    Click="max_Click">最大化</Button>
+                            <Button Name="cancel" Click="cancel_Click">キャンセル</Button>
+                            <Button Name="ok"     Click="ok_Click">OK</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
