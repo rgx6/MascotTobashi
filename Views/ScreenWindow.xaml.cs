@@ -89,7 +89,6 @@ namespace MascotTobashi.Views
             mascot.Name = name;
             mascot.Source = GetRandomImage();
             mascot.Width = mascot.Source.Width * Config.Current.Scale;
-            System.Diagnostics.Debug.WriteLine(mascot.Source.Width + " " + Config.Current.Scale + " " + mascot.Width);
 
             this.RegisterName(mascot.Name, mascot);
 
